@@ -44,7 +44,7 @@ echo "Extracting Ruby 1.9.2p136"
 tar -xzf ruby-1.9.2-p136.tar.gz >> ~/railsready/install.log
 echo "done..."
 echo "Building Ruby 1.9.2p136 (this may take awhile and build output may appear on screen)..."
-cd  ruby-1.9.2-p136 && ./configure >> ~/railsready/install.log && make >> ~/railsready/install.log && sudo make install >> ~/railsready/install.log
+cd  ruby-1.9.2-p136 && ./configure --prefix=/usr/local >> ~/railsready/install.log && make >> ~/railsready/install.log && sudo make install >> ~/railsready/install.log
 echo "done..."
 
 # Reload bash

@@ -1,5 +1,5 @@
 #Rails Ready
-##Get a full Ruby on Rails stack up with one command :)
+##Get a full Ruby on Rails stack up in one line :)
 
 ##Run this on a fresh install. Tested on Ubuntu server 10.04 lts
 
@@ -10,7 +10,7 @@
 ##What this gives you:
 
   * An updated system
-  * Ruby 1.9.2p136
+  * Ruby 1.9.2p136 (installed to /usr/local/bin/ruby)
   * Imagemagick
   * libs needed to run Rails (sqlite, mysql, etc)
   * Bundler, Passenger, and Rails gems
@@ -18,4 +18,6 @@
 
 Just install a NGINX or Apache, run passenger-install-nginx-module or passenger-install-apache-module, upload your app, point your vhost config to your apps public dir and go!
 
-I use this to setup VMs all the time but I'm sure this script can be improved upon. I'll update the commands and ruby versions as they change.
+This method may not be ideal for everyone. Some people may prefer to use RVM. I use RVM in development but in production I only need 1.9.2 and gems are local to the app user thanks to bundler. Building from source (for me) is better since my servers are only running one app each and I know exactly what they need to run.
+
+I use this to setup VMs all the time but I'm sure this script can be improved. It's meant to serve as quick start to get all the dependencies, Ruby, and Rails on a system with no interaction. Basically it's just running all the apt-get commands for you (aside from building Ruby). I'll update the commands and ruby versions as they change.
