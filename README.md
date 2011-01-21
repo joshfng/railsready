@@ -14,6 +14,7 @@
   * Imagemagick
   * libs needed to run Rails (sqlite, mysql, etc)
   * Bundler, Passenger, and Rails gems
+  * Git
 
 Just install a NGINX or Apache, run passenger-install-nginx-module or passenger-install-apache-module, upload your app, point your vhost config to your apps public dir and go!
 
