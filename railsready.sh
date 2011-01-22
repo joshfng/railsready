@@ -41,6 +41,7 @@ echo "done.."
 echo "Installing build tools..."
 sudo apt-get -y install \
     wget curl build-essential \
+    bison openssl zlib1g \
     libxslt1.1 libssl-dev libxslt1-dev \
     libxml2 libffi-dev libyaml-dev \
     libxslt-dev autoconf libc6-dev \
