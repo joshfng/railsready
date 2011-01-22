@@ -84,10 +84,10 @@ if [ $whichRuby -eq 1 ] ; then
   echo -e "\n=> Downloading Ruby $ruby_version_string \n"
   cd src && wget $ruby_source_url
   echo -e "\n==> done..."
-  echo -e "\n=> Extracting Ruby 1.9.2p136"
+  echo -e "\n=> Extracting Ruby $ruby_version_string"
   tar -xzf $ruby_source_tar_name >> ~/railsready/install.log
   echo "==> done..."
-  echo -e "\n=> Building Ruby 1.9.2p136 (this may take awhile and build output may appear on screen)..."
+  echo -e "\n=> Building Ruby $ruby_version_string (this may take awhile and build output may appear on screen)..."
   cd  $ruby_source_dir_name && ./configure --prefix=/usr/local >> ~/railsready/install.log && make >> ~/railsready/install.log && sudo make install >> ~/railsready/install.log
   echo "==> done..."
 elif [ $whichRuby -eq 2 ] ; then
