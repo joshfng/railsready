@@ -17,8 +17,10 @@
   * Bundler, Passenger, and Rails gems
   * Git
 
-Just install a NGINX or Apache, run passenger-install-nginx-module or passenger-install-apache-module, upload your app, point your vhost config to your apps public dir and go!
+Just install either NGINX or Apache, run passenger-install-nginx-module or passenger-install-apache-module, upload your app, point your vhost config to your apps public dir and go!
 
 Please note: If you are running on a super slow connection your sudo session may timeout and you'll have to enter your password again. If you're running this on an EC2 or RS instance it shouldn't be problem.
 
-I use this to setup VMs all the time but I'm sure this script can be improved. It's meant to serve as quick start to get all the dependencies, Ruby, and Rails on a system with no interaction. Basically it's just running all the apt-get commands for you (aside from building Ruby). I'll update the commands and ruby versions as they change.
+I use this to setup VMs all the time but I'm sure this script can be improved. It's meant to serve as a quick start to get all the dependencies, Ruby, and Rails on a system with no interaction. Basically it's just running all the apt-get commands for you (aside from building Ruby or installing RVM). I'll update the commands and ruby versions as they change.
+
+If you use this and have any suggestions let me know joshfng@gmail.com

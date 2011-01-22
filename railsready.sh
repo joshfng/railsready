@@ -109,7 +109,7 @@ if [ $whichRuby -eq 1 ] ; then
   echo -e "\n=> Extracting Ruby $ruby_version_string"
   tar -xzf $ruby_source_tar_name >> ~/railsready/install.log 2>> ~/railsready/install.log
   echo "==> done..."
-  echo -e "\n=> Building Ruby $ruby_version_string (this may take awhile and build output may appear on screen)..."
+  echo -e "\n=> Building Ruby $ruby_version_string (this will take awhile)..."
   cd  $ruby_source_dir_name && ./configure --prefix=/usr/local >> ~/railsready/install.log 2>> ~/railsready/install.log \
    && make >> ~/railsready/install.log 2>> ~/railsready/install.log \
     && sudo make install >> ~/railsready/install.log 2>> ~/railsready/install.log
