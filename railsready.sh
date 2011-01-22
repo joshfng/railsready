@@ -28,6 +28,18 @@ echo -e "\n\n"
 echo "!!! This script will update your system! Run on a fresh install only !!!"
 echo "run tail -f ~/railsready/install.log in a new terminal to watch the install"
 
+echo -e "\n"
+echo "What this script gets you:"
+echo " * An updated system"
+echo " * Ruby $ruby_version_string"
+echo " * Imagemagick"
+echo " * libs needed to run Rails (sqlite, mysql, etc)"
+echo " * Bundler, Passenger, and Rails gems"
+echo " * Git"
+
+echo -e "\nThis script is always changing."
+echo "Make sure you got it from https://github.com/joshfng/railsready"
+
 # Ask if you want to build Ruby or install RVM
 echo -e "\n"
 echo "Build Ruby or install RVM?"
@@ -51,7 +63,7 @@ echo "==> done..."
 
 # Update the system before going any further
 echo -e "\n=> Updating system (this may take awhile)..."
-sudo apt-get update &> install.log && sudo apt-get -y upgrade &> install.log
+sudo apt-get update 2>&1 >> install.log && sudo apt-get -y upgrade 2>&1 >> install.log
 echo "==> done..."
 
 # Install build tools
@@ -62,21 +74,21 @@ sudo apt-get -y install \
     libxslt1.1 libssl-dev libxslt1-dev \
     libxml2 libffi-dev libyaml-dev \
     libxslt-dev autoconf libc6-dev \
-    libreadline6-dev zlib1g-dev &> install.log
+    libreadline6-dev zlib1g-dev 2>&1 >> install.log
 echo "==> done..."
 
 echo -e "\n=> Installing libs needed for sqlite and mysql..."
-sudo apt-get -y install libsqlite3-0 sqlite3 libsqlite3-dev libmysqlclient16-dev libmysqlclient16 &> install.log
+sudo apt-get -y install libsqlite3-0 sqlite3 libsqlite3-dev libmysqlclient16-dev libmysqlclient16 2>&1 >> install.log
 echo "==> done..."
 
 # Install imagemagick
 echo -e "\n=> Installing imagemagick (this may take awhile)..."
-sudo apt-get -y install imagemagick libmagick9-dev &> install.log
+sudo apt-get -y install imagemagick libmagick9-dev 2>&1 >> install.log
 echo "==> done..."
 
 # Install git-core
 echo -e "\n=> Installing git..."
-sudo apt-get -y install git-core &> install.log
+sudo apt-get -y install git-core 2>&1 >> install.log
 echo "==> done..."
 
 if [ $whichRuby -eq 1 ] ; then
@@ -85,27 +97,27 @@ if [ $whichRuby -eq 1 ] ; then
   cd src && wget $ruby_source_url
   echo -e "\n==> done..."
   echo -e "\n=> Extracting Ruby $ruby_version_string"
-  tar -xzf $ruby_source_tar_name &> ~/railsready/install.log
+  tar -xzf $ruby_source_tar_name 2>&1 >> ~/railsready/install.log
   echo "==> done..."
   echo -e "\n=> Building Ruby $ruby_version_string (this may take awhile and build output may appear on screen)..."
-  cd  $ruby_source_dir_name && ./configure --prefix=/usr/local &> ~/railsready/install.log && make &> ~/railsready/install.log && sudo make install &> ~/railsready/install.log
+  cd  $ruby_source_dir_name && ./configure --prefix=/usr/local 2>&1 >> ~/railsready/install.log && make 2>&1 >> ~/railsready/install.log && sudo make install 2>&1 >> ~/railsready/install.log
   echo "==> done..."
 elif [ $whichRuby -eq 2 ] ; then
   #thanks wayneeseguin :)
   echo -e "\n=> Installing RVM the Ruby environment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
   curl -O -L http://rvm.beginrescueend.com/releases/rvm-install-head
   chmod +x rvm-install-head
-  "$PWD/rvm-install-head" &> ~/railsready/install.log
+  "$PWD/rvm-install-head" 2>&1 >> ~/railsready/install.log
   [[ -f rvm-install-head ]] && rm -f rvm-install-head
   echo -e "\n==> Setting up RVM to load with new shells."
-  echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' &> "$HOME/.bashrc"
+  echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' 2>&1 >> "$HOME/.bashrc"
   echo "==> Loading RVM"
   source ~/.rvm/scripts/rvm
   source ~/.bashrc
   echo "==> done..."
   echo -e "\n=> Installing $ruby_version_string (this will take awhile)"
   echo -e "=> More information about installing rubies can be found at http://rvm.beginrescueend.com/rubies/installing/ \n"
-  rvm install $ruby_version &> ~/railsready/install.log
+  rvm install $ruby_version 2>&1 >> ~/railsready/install.log
   echo -e "\n==> done..."
   echo -e "\n=> Using 1.9.2 and setting it as default for new shells"
   echo "=> More information about Rubies can be found at http://rvm.beginrescueend.com/rubies/default/"
@@ -123,9 +135,9 @@ echo "==> done..."
 
 echo -e "\n=> Installing Bundler, Passenger and Rails.."
 if [ $whichRuby -eq 1 ] ; then
-  sudo gem install bundler passenger rails --no-ri --no-rdoc &> ~/railsready/install.log
+  sudo gem install bundler passenger rails --no-ri --no-rdoc 2>&1 >> ~/railsready/install.log
 elif [ $whichRuby -eq 2 ] ; then
-  gem install bundler passenger rails --no-ri --no-rdoc &> ~/railsready/install.log
+  gem install bundler passenger rails --no-ri --no-rdoc 2>&1 >> ~/railsready/install.log
 fi
 echo "==> done..."
 
@@ -133,3 +145,5 @@ echo -e "\n#################################\n"
 echo "Installation is complete!"
 
 echo -e "\n !!! logout and back in to access Ruby or run source ~/.bashrc !!!\n"
+
+echo -e "\n Thanks!\n-Josh\n"
