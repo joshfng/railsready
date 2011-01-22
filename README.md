@@ -21,6 +21,4 @@ Just install a NGINX or Apache, run passenger-install-nginx-module or passenger-
 
 Please note: If you are running on a super slow connection your sudo session may timeout and you'll have to enter your password again. If you're running this on an EC2 or RS instance it shouldn't be problem.
 
-This method may not be ideal for everyone. Some people may prefer to use RVM. I use RVM in development but in production I only need 1.9.2 and gems are local to the app user thanks to bundler. Building from source (for me) is better since my servers are only running one app each and I know exactly what they need to run.
-
 I use this to setup VMs all the time but I'm sure this script can be improved. It's meant to serve as quick start to get all the dependencies, Ruby, and Rails on a system with no interaction. Basically it's just running all the apt-get commands for you (aside from building Ruby). I'll update the commands and ruby versions as they change.
