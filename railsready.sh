@@ -50,7 +50,7 @@ cd && mkdir -p railsready/src && cd railsready && touch install.log
 echo "==> done..."
 
 # Update the system before going any further
-echo -e "\n=> Updating system..."
+echo -e "\n=> Updating system (this may take awhile)..."
 sudo apt-get update >> install.log && sudo apt-get -y upgrade >> install.log
 echo "==> done..."
 
