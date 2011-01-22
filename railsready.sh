@@ -116,7 +116,7 @@ if [ $whichRuby -eq 1 ] ; then
   echo "==> done..."
 elif [ $whichRuby -eq 2 ] ; then
   #thanks wayneeseguin :)
-  echo -e "\n=> Installing RVM the Ruby environment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
+  echo -e "\n=> Installing RVM the Ruby enVironment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
   curl -O -L http://rvm.beginrescueend.com/releases/rvm-install-head
   chmod +x rvm-install-head
   "$PWD/rvm-install-head" >> ~/railsready/install.log 2>> ~/railsready/install.log
@@ -134,7 +134,7 @@ elif [ $whichRuby -eq 2 ] ; then
   echo -e "\n==> done..."
   echo -e "\n=> Using 1.9.2 and setting it as default for new shells..."
   echo "=> More information about Rubies can be found at http://rvm.beginrescueend.com/rubies/default/"
-  rvm --default use $ruby_version
+  rvm --default use $ruby_version >> ~/railsready/install.log 2>> ~/railsready/install.log
   echo "==> done..."
 else
   echo "How did you even get here?"
