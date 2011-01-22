@@ -5,12 +5,13 @@
 
 ##To run:
   * sudo apt-get -y install curl && curl https://github.com/joshfng/railsready/raw/master/railsready.sh >> railsready.sh && chmod a+x railsready.sh && ./railsready.sh
+  * The script will ask if you want to build Ruby from source or install RVM
   * If you want to watch the magic happen run "tail -f ~/railsready/install.log"
 
 ##What this gives you:
 
   * An updated system
-  * Ruby 1.9.2p136 (installed to /usr/local/bin/ruby)
+  * Ruby 1.9.2p136 (installed to /usr/local/bin/ruby) or RVM running 1.9.2p136
   * Imagemagick
   * libs needed to run Rails (sqlite, mysql, etc)
   * Bundler, Passenger, and Rails gems
