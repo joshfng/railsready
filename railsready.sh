@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Author: Josh Frye <joshfng>
+# Author: Josh Frye <joshfng@gmail.com>
 # Licence: MIT
 #
 # Contributions from: Wayne E. Seguin <wayneeseguin@gmail.com>
