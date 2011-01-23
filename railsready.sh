@@ -125,8 +125,11 @@ elif [ $whichRuby -eq 2 ] ; then
   echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> "$HOME/.bashrc"
   echo "==>done..."
   echo "=> Loading RVM..."
-  source ~/.rvm/scripts/rvm
-  source ~/.bashrc
+  #if RVM is installed as user root it goes to /usr/local/rvm/ not ~/.rvm
+  if [ $script_runner != "root" ] ; then
+    source ~/.rvm/scripts/rvm
+    source ~/.bashrc
+  fi
   echo "==> done..."
   echo -e "\n=> Installing $ruby_version_string (this will take awhile)..."
   echo -e "=> More information about installing rubies can be found at http://rvm.beginrescueend.com/rubies/installing/ \n"
