@@ -4,9 +4,9 @@
 ##Run this on a fresh install. Tested on Ubuntu server 10.04 lts
 
 ##To run:
-  * sudo apt-get -y install curl && curl https://github.com/joshfng/railsready/raw/master/railsready.sh >> railsready.sh && chmod a+x railsready.sh && ./railsready.sh
+  * `sudo wget --no-check-certificate https://github.com/joshfng/railsready/raw/master/railsready.sh && bash railsready.sh`
   * The script will ask if you want to build Ruby from source or install RVM
-  * If you want to watch the magic happen run "tail -f ~/railsready/install.log"
+  * If you want to watch the magic happen run `tail -f ~/railsready/install.log`
 
 ##What this gives you:
 
