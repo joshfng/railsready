@@ -4,6 +4,7 @@
 # Licence: MIT
 #
 # Contributions from: Wayne E. Seguin <wayneeseguin@gmail.com>
+# Contributions from: Ryan McGeary <ryan@mcgeary.org>
 #
 
 ruby_version="1.9.2"
