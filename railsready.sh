@@ -72,36 +72,17 @@ echo -e "\n=> Creating install dir..."
 cd && mkdir -p railsready/src && cd railsready && touch install.log
 echo "==> done..."
 
-# Update the system before going any further
-echo -e "\n=> Updating system (this may take awhile)..."
-sudo apt-get update >> $log_file 2>&1 \
- && sudo apt-get -y upgrade >> $log_file 2>&1
-echo "==> done..."
+if command -v aptitude >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1 ; then
+  distro="ubuntu"
+elif command -v yum >/dev/null 2>&1 ; then
+  distro="centos"
+else
+  echo -e "\nRails Ready currently only supports Ubuntu and CentOS\n"
+  exit 1
+fi
 
-# Install build tools
-echo -e "\n=> Installing build tools..."
-sudo apt-get -y install \
-    wget curl build-essential \
-    bison openssl zlib1g \
-    libxslt1.1 libssl-dev libxslt1-dev \
-    libxml2 libffi-dev libyaml-dev \
-    libxslt-dev autoconf libc6-dev \
-    libreadline6-dev zlib1g-dev >> $log_file 2>&1
-echo "==> done..."
-
-echo -e "\n=> Installing libs needed for sqlite and mysql..."
-sudo apt-get -y install libsqlite3-0 sqlite3 libsqlite3-dev libmysqlclient16-dev libmysqlclient16 >> $log_file 2>&1
-echo "==> done..."
-
-# Install imagemagick
-echo -e "\n=> Installing imagemagick (this may take awhile)..."
-sudo apt-get -y install imagemagick libmagick9-dev >> $log_file 2>&1
-echo "==> done..."
-
-# Install git-core
-echo -e "\n=> Installing git..."
-sudo apt-get -y install git-core >> $log_file 2>&1
-echo "==> done..."
+#Download the distro specific commands and run them
+sudo wget --no-check-certificate -O $(cd && pwd)/railsready/src/$distro.sh https://github.com/joshfng/railsready/raw/master/recipes/$distro.sh && $(cd && pwd)/railsready/src && bash $distro.sh
 
 if [ $whichRuby -eq 1 ] ; then
   # Install Ruby
