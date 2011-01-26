@@ -30,9 +30,6 @@ control_c()
 # trap keyboard interrupt (control-c)
 trap control_c SIGINT
 
-# Check if the user has sudo privileges.
-sudo -v >/dev/null 2>&1 || { echo $script_runner has no sudo privileges ; exit 1; }
-
 echo -e "\n\n"
 echo "#################################"
 echo "########## Rails Ready ##########"
@@ -44,7 +41,7 @@ if [[ $distro_sig =~ ubuntu ]] ; then
 elif [[ $distro_sig =~ centos ]] ; then
   distro="centos"
 else
-  echo -e "\nRails Ready currently only supports Ubuntu and CentOS (at this time)\n"
+  echo -e "\nRails Ready currently only supports Ubuntu and CentOS\n"
   exit 1
 fi
 
@@ -53,6 +50,9 @@ if [ $script_runner == "root" ] ; then
   echo -e "\nThis script must be run as a normal user with sudo privileges\n"
   exit 1
 fi
+
+# Check if the user has sudo privileges.
+sudo -v >/dev/null 2>&1 || { echo $script_runner has no sudo privileges ; exit 1; }
 
 echo -e "\n\n"
 echo "!!! This script will update your system! Run on a fresh install only !!!"
