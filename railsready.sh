@@ -1,11 +1,15 @@
 #!/bin/bash
 #
+# Rails Ready
+#
 # Author: Josh Frye <joshfng@gmail.com>
 # Licence: MIT
 #
 # Contributions from: Wayne E. Seguin <wayneeseguin@gmail.com>
 # Contributions from: Ryan McGeary <ryan@mcgeary.org>
 #
+shopt -s nocaseglob
+set -e
 
 ruby_version="1.9.2"
 ruby_version_string="1.9.2p136"
@@ -13,7 +17,9 @@ ruby_source_url="ftp://ftp.ruby-lang.org//pub/ruby/1.9/ruby-1.9.2-p136.tar.gz"
 ruby_source_tar_name="ruby-1.9.2-p136.tar.gz"
 ruby_source_dir_name="ruby-1.9.2-p136"
 script_runner=$(whoami)
-log_file=$(cd && pwd)/railsready/install.log
+railsready_path=$(cd && pwd)/railsready
+log_file="$railsready_path/install.log"
+distro_sig=$(cat /etc/issue)
 
 control_c()
 {
@@ -24,9 +30,6 @@ control_c()
 # trap keyboard interrupt (control-c)
 trap control_c SIGINT
 
-shopt -s extglob
-set -e
-
 # Check if the user has sudo privileges.
 sudo -v >/dev/null 2>&1 || { echo $script_runner has no sudo privileges ; exit 1; }
 
@@ -34,6 +37,22 @@ echo -e "\n\n"
 echo "#################################"
 echo "########## Rails Ready ##########"
 echo "#################################"
+
+#determine the distro
+if [[ $distro_sig =~ ubuntu ]] ; then
+  distro="ubuntu"
+elif [[ $distro_sig =~ centos ]] ; then
+  distro="centos"
+else
+  echo -e "\nRails Ready currently only supports Ubuntu and CentOS (at this time)\n"
+  exit 1
+fi
+
+#now check if user is root
+if [ $script_runner == "root" ] ; then
+  echo -e "\nThis script must be run as a normal user with sudo privileges\n"
+  exit 1
+fi
 
 echo -e "\n\n"
 echo "!!! This script will update your system! Run on a fresh install only !!!"
@@ -72,41 +91,20 @@ echo -e "\n=> Creating install dir..."
 cd && mkdir -p railsready/src && cd railsready && touch install.log
 echo "==> done..."
 
-# Update the system before going any further
-echo -e "\n=> Updating system (this may take awhile)..."
-sudo apt-get update >> $log_file 2>&1 \
- && sudo apt-get -y upgrade >> $log_file 2>&1
+echo -e "\n=> Ensuring there is a .bashrc and .bash_profile..."
+sudo touch $HOME/.bashrc && sudo touch $HOME/.bash_profile
 echo "==> done..."
 
-# Install build tools
-echo -e "\n=> Installing build tools..."
-sudo apt-get -y install \
-    wget curl build-essential \
-    bison openssl zlib1g \
-    libxslt1.1 libssl-dev libxslt1-dev \
-    libxml2 libffi-dev libyaml-dev \
-    libxslt-dev autoconf libc6-dev \
-    libreadline6-dev zlib1g-dev >> $log_file 2>&1
-echo "==> done..."
+echo -e "\n=> Downloading and running recipe for $distro...\n"
+#Download the distro specific recipe and run it, passing along all the variables as args
+sudo wget --no-check-certificate -O $railsready_path/src/$distro.sh https://github.com/joshfng/railsready/raw/master/recipes/$distro.sh && cd $railsready_path/src && bash $distro.sh $ruby_version $ruby_version_string $ruby_source_url $ruby_source_tar_name $ruby_source_dir_name $whichRuby $railsready_path $log_file
+echo -e "\n==> done running $distro specific commands..."
 
-echo -e "\n=> Installing libs needed for sqlite and mysql..."
-sudo apt-get -y install libsqlite3-0 sqlite3 libsqlite3-dev libmysqlclient16-dev libmysqlclient16 >> $log_file 2>&1
-echo "==> done..."
-
-# Install imagemagick
-echo -e "\n=> Installing imagemagick (this may take awhile)..."
-sudo apt-get -y install imagemagick libmagick9-dev >> $log_file 2>&1
-echo "==> done..."
-
-# Install git-core
-echo -e "\n=> Installing git..."
-sudo apt-get -y install git-core >> $log_file 2>&1
-echo "==> done..."
-
+#now that all the distro specific packages are installed lets get Ruby
 if [ $whichRuby -eq 1 ] ; then
   # Install Ruby
   echo -e "\n=> Downloading Ruby $ruby_version_string \n"
-  cd src && wget $ruby_source_url
+  cd $railsready_path/src && wget $ruby_source_url
   echo -e "\n==> done..."
   echo -e "\n=> Extracting Ruby $ruby_version_string"
   tar -xzf $ruby_source_tar_name >> $log_file 2>&1
@@ -124,16 +122,14 @@ elif [ $whichRuby -eq 2 ] ; then
   "$PWD/rvm-install-head" >> $log_file 2>&1
   [[ -f rvm-install-head ]] && rm -f rvm-install-head
   echo -e "\n=> Setting up RVM to load with new shells..."
-  echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> "$HOME/.bashrc"
-  echo "==>done..."
-  echo "=> Loading RVM..."
   #if RVM is installed as user root it goes to /usr/local/rvm/ not ~/.rvm
-  if [ $script_runner != "root" ] ; then
-    source ~/.rvm/scripts/rvm
-    source ~/.bashrc
-  fi
+  echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> ~/.bashrc
   echo "==> done..."
-  echo -e "\n=> Installing $ruby_version_string (this will take awhile)..."
+  echo "=> Loading RVM..."
+  source ~/.rvm/scripts/rvm
+  source ~/.bashrc
+  echo "==> done..."
+  echo -e "\n=> Installing Ruby $ruby_version_string (this will take awhile)..."
   echo -e "=> More information about installing rubies can be found at http://rvm.beginrescueend.com/rubies/installing/ \n"
   rvm install $ruby_version >> $log_file 2>&1
   echo -e "\n==> done..."
@@ -147,7 +143,7 @@ else
 fi
 
 # Reload bash
-echo -e "\n=> Reloading bashrc so ruby and rubygems are available..."
+echo -e "\n=> Reloading shell so ruby and rubygems are available..."
 source ~/.bashrc
 echo "==> done..."
 

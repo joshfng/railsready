@@ -1,15 +1,17 @@
 #Rails Ready
-##Get a full Ruby on Rails stack up in one line :)
+###Ruby and Rails setup script for Linux systems
+###Distros supported:
+ * Ubuntu 10.04 LTS
+ * CentOS 5.5 (utilizes the Fedora EPEL repo)
 
-##Run this on a fresh install. Tested on Ubuntu server 10.04 lts
+# 
+###Run this on a fresh install. It WILL update your system!
 
-##To run:
+###To run:
   * `wget --no-check-certificate https://github.com/joshfng/railsready/raw/master/railsready.sh && bash railsready.sh`
   * The script will ask if you want to build Ruby from source or install RVM
-  * If you want to watch the magic happen run `tail -f ~/railsready/install.log`
 
-##What this gives you:
-
+###What this gives you:
   * An updated system
   * Ruby 1.9.2p136 (installed to /usr/local/bin/ruby) or RVM running 1.9.2p136
   * Imagemagick
@@ -21,6 +23,7 @@ Just install either NGINX or Apache, run passenger-install-nginx-module or passe
 
 Please note: If you are running on a super slow connection your sudo session may timeout and you'll have to enter your password again. If you're running this on an EC2 or RS instance it shouldn't be problem.
 
-I use this to setup VMs all the time but I'm sure this script can be improved. It's meant to serve as a quick start to get all the dependencies, Ruby, and Rails on a system with no interaction. Basically it's just running all the apt-get commands for you (aside from building Ruby or installing RVM). I'll update the commands and ruby versions as they change.
+# 
+####Rails Ready now supports a "plugin" type system. The distro is detected and a corresponding "recipe" file is pulled down to run the distro specific setup steps. Check the recipes dir to see if your distro is supported. If you would like to add support for a system fork the repo, write a recipe, and submit a pull request. Take a look at recipes/ubuntu.sh for an idea of what to model your recipe after.
 
-If you use this and have any suggestions let me know joshfng@gmail.com
+If you use this or have any suggestions let me know joshfng@gmail.com
