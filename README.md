@@ -4,7 +4,7 @@
 ##Run this on a fresh install. Tested on Ubuntu server 10.04 lts
 
 ##To run:
-  * `sudo wget --no-check-certificate https://github.com/joshfng/railsready/raw/master/railsready.sh && bash railsready.sh`
+  * `wget --no-check-certificate https://github.com/joshfng/railsready/raw/master/railsready.sh && bash railsready.sh`
   * The script will ask if you want to build Ruby from source or install RVM
   * If you want to watch the magic happen run `tail -f ~/railsready/install.log`
 
