@@ -51,9 +51,6 @@ if [ $script_runner == "root" ] ; then
   exit 1
 fi
 
-# Check if the user has sudo privileges.
-sudo -v >/dev/null 2>&1 || { echo $script_runner has no sudo privileges ; exit 1; }
-
 echo -e "\n\n"
 echo "!!! This script will update your system! Run on a fresh install only !!!"
 echo "run tail -f $log_file in a new terminal to watch the install"
@@ -69,6 +66,9 @@ echo " * Git"
 
 echo -e "\nThis script is always changing."
 echo "Make sure you got it from https://github.com/joshfng/railsready"
+
+# Check if the user has sudo privileges.
+sudo -v >/dev/null 2>&1 || { echo $script_runner has no sudo privileges ; exit 1; }
 
 # Ask if you want to build Ruby or install RVM
 echo -e "\n"
