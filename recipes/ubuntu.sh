@@ -24,7 +24,7 @@ log_file=$8
 #test if aptitude exists and default to using that if possible
 if command -v aptitude >/dev/null 2>&1 ; then
   pm="aptitude"
-elif command -v $pm >/dev/null 2>&1 ; then
+else
   pm="apt-get"
 fi
 
