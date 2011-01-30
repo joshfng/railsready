@@ -19,10 +19,6 @@ script_runner=$(whoami)
 railsready_path=$7
 log_file=$8
 
-git_source_url="http://kernel.org/pub/software/scm/git/git-1.7.3.5.tar.bz2"
-git_source_tar_name="git-1.7.3.5.tar.bz2"
-git_source_dir_name="git-1.7.3.5"
-
 epel_repo_url="http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
 
 #echo "vars set: $ruby_version $ruby_version_string $ruby_source_url $ruby_source_tar_name $ruby_source_dir_name $whichRuby $railsready_path $log_file"

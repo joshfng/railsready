@@ -92,12 +92,12 @@ cd && mkdir -p railsready/src && cd railsready && touch install.log
 echo "==> done..."
 
 echo -e "\n=> Ensuring there is a .bashrc and .bash_profile..."
-sudo touch $HOME/.bashrc && sudo touch $HOME/.bash_profile
+touch $HOME/.bashrc && touch $HOME/.bash_profile
 echo "==> done..."
 
 echo -e "\n=> Downloading and running recipe for $distro...\n"
 #Download the distro specific recipe and run it, passing along all the variables as args
-sudo wget --no-check-certificate -O $railsready_path/src/$distro.sh https://github.com/joshfng/railsready/raw/master/recipes/$distro.sh && cd $railsready_path/src && bash $distro.sh $ruby_version $ruby_version_string $ruby_source_url $ruby_source_tar_name $ruby_source_dir_name $whichRuby $railsready_path $log_file
+wget --no-check-certificate -O $railsready_path/src/$distro.sh https://github.com/joshfng/railsready/raw/master/recipes/$distro.sh && cd $railsready_path/src && bash $distro.sh $ruby_version $ruby_version_string $ruby_source_url $ruby_source_tar_name $ruby_source_dir_name $whichRuby $railsready_path $log_file
 echo -e "\n==> done running $distro specific commands..."
 
 #now that all the distro specific packages are installed lets get Ruby
