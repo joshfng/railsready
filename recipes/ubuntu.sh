@@ -44,7 +44,7 @@ sudo $pm -y install \
     libxslt1.1 libssl-dev libxslt1-dev \
     libxml2 libffi-dev libyaml-dev \
     libxslt-dev autoconf libc6-dev \
-    libreadline6-dev zlib1g-dev >> $log_file 2>&1
+    libreadline6-dev zlib1g-dev libcurl4-openssl-dev >> $log_file 2>&1
 echo "==> done..."
 
 echo -e "\n=> Installing libs needed for sqlite and mysql..."
