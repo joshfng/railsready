@@ -161,6 +161,6 @@ echo -e "\n#################################"
 echo    "### Installation is complete! ###"
 echo -e "#################################\n"
 
-echo -e "\n !!! logout and back in to access Ruby or run source ~/.bashrc !!!\n"
+echo -e "\n !!! logout and back in to access Ruby or run source ~/.bash_profile !!!\n"
 
 echo -e "\n Thanks!\n-Josh\n"
