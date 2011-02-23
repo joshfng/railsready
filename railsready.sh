@@ -128,6 +128,7 @@ elif [ $whichRuby -eq 2 ] ; then
   echo "=> Loading RVM..."
   source ~/.rvm/scripts/rvm
   source ~/.bashrc
+  source ~/.bash_profile
   echo "==> done..."
   echo -e "\n=> Installing Ruby $ruby_version_string (this will take awhile)..."
   echo -e "=> More information about installing rubies can be found at http://rvm.beginrescueend.com/rubies/installing/ \n"
@@ -145,6 +146,7 @@ fi
 # Reload bash
 echo -e "\n=> Reloading shell so ruby and rubygems are available..."
 source ~/.bashrc
+source ~/.bash_profile
 echo "==> done..."
 
 echo -e "\n=> Installing Bundler, Passenger and Rails.."
