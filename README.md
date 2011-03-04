@@ -1,7 +1,7 @@
 #Rails Ready
 ###Ruby and Rails setup script for Linux systems
 ###Distros supported:
- * Ubuntu 10.04 LTS
+ * Ubuntu 10.04 LTS and 10.10
  * CentOS 5.5 (utilizes the Fedora EPEL repo)
 
 # 
@@ -13,7 +13,7 @@
 
 ###What this gives you:
   * An updated system
-  * Ruby 1.9.2p136 (installed to /usr/local/bin/ruby) or RVM running 1.9.2p136
+  * Ruby 1.9.2 latest patch level (installed to /usr/local/bin/ruby) or RVM running 1.9.2 latest patch level
   * Imagemagick
   * libs needed to run Rails (sqlite, mysql, etc)
   * Bundler, Passenger, and Rails gems
