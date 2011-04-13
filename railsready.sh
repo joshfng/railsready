@@ -92,6 +92,7 @@ cd && mkdir -p railsready/src && cd railsready && touch install.log
 echo "==> done..."
 
 echo -e "\n=> Ensuring there is a .bashrc and .bash_profile..."
+rm $HOME/.bashrc && rm $HOME/.bash_profile
 touch $HOME/.bashrc && touch $HOME/.bash_profile
 echo "==> done..."
 
@@ -117,13 +118,14 @@ if [ $whichRuby -eq 1 ] ; then
 elif [ $whichRuby -eq 2 ] ; then
   #thanks wayneeseguin :)
   echo -e "\n=> Installing RVM the Ruby enVironment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
-  curl -O -L http://rvm.beginrescueend.com/releases/rvm-install-head
-  chmod +x rvm-install-head
-  "$PWD/rvm-install-head" >> $log_file 2>&1
-  [[ -f rvm-install-head ]] && rm -f rvm-install-head
+  bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+  #curl -O -L http://rvm.beginrescueend.com/releases/rvm-install-head
+  #chmod +x rvm-install-head
+  #"$PWD/rvm-install-head" >> $log_file 2>&1
+  #[[ -f rvm-install-head ]] && rm -f rvm-install-head
   echo -e "\n=> Setting up RVM to load with new shells..."
   #if RVM is installed as user root it goes to /usr/local/rvm/ not ~/.rvm
-  echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> ~/.bash_profile
+  echo 'source $HOME/.bash_profile' >> $HOME/.bashrc
   echo "==> done..."
   echo "=> Loading RVM..."
   source ~/.rvm/scripts/rvm
@@ -145,11 +147,19 @@ fi
 
 # Reload bash
 echo -e "\n=> Reloading shell so ruby and rubygems are available..."
-source ~/.bashrc
-source ~/.bash_profile
+source $HOME/.bashrc
+source $HOME/.bash_profile
 echo "==> done..."
 
-echo -e "\n=> Installing Bundler, Passenger and Rails.."
+echo -e "\n=> Updating Rubygems..."
+if [ $whichRuby -eq 1 ] ; then
+  sudo gem update --system --no-ri --no-rdoc >> $log_file 2>&1
+elif [ $whichRuby -eq 2 ] ; then
+  gem update --system --no-ri --no-rdoc >> $log_file 2>&1
+fi
+echo "==> done..."
+
+echo -e "\n=> Installing Bundler, Passenger and Rails..."
 if [ $whichRuby -eq 1 ] ; then
   sudo gem install bundler passenger rails --no-ri --no-rdoc >> $log_file 2>&1
 elif [ $whichRuby -eq 2 ] ; then
