@@ -92,7 +92,7 @@ cd && mkdir -p railsready/src && cd railsready && touch install.log
 echo "==> done..."
 
 echo -e "\n=> Ensuring there is a .bashrc and .bash_profile..."
-rm $HOME/.bashrc && rm $HOME/.bash_profile
+rm -f $HOME/.bashrc && rm -f $HOME/.bash_profile
 touch $HOME/.bashrc && touch $HOME/.bash_profile
 echo "==> done..."
 
