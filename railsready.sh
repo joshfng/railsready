@@ -118,7 +118,7 @@ if [ $whichRuby -eq 1 ] ; then
 elif [ $whichRuby -eq 2 ] ; then
   #thanks wayneeseguin :)
   echo -e "\n=> Installing RVM the Ruby enVironment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
-  curl -O -L http://rvm.beginrescueend.com/releases/rvm-install-head
+  curl -O -L -k http://rvm.beginrescueend.com/releases/rvm-install-head
   chmod +x rvm-install-head
   "$PWD/rvm-install-head" >> $log_file 2>&1
   [[ -f rvm-install-head ]] && rm -f rvm-install-head
