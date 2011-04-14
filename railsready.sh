@@ -94,7 +94,7 @@ echo "==> done..."
 echo -e "\n=> Ensuring there is a .bashrc and .bash_profile..."
 rm -f $HOME/.bashrc && rm -f $HOME/.bash_profile
 touch $HOME/.bashrc && touch $HOME/.bash_profile
-echo 'PS1="[\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;33m\]\H\[\033[1;34m\] \W\[\033[0m\]] $ "' >> $HOME/.bashrc
+echo 'PS1="[\u@\h:\w] $ "' >> $HOME/.bashrc
 echo "==> done..."
 
 echo -e "\n=> Downloading and running recipe for $distro...\n"
