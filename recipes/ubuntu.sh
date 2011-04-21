@@ -39,7 +39,7 @@ echo "==> done..."
 # Install build tools
 echo -e "\n=> Installing build tools..."
 sudo $pm -y install \
-    wget curl build-essential \
+    wget curl build-essential clang \
     bison openssl zlib1g \
     libxslt1.1 libssl-dev libxslt1-dev \
     libxml2 libffi-dev libyaml-dev \
