@@ -111,7 +111,7 @@ if [ $whichRuby -eq 1 ] ; then
   echo -e "\n=> Extracting Ruby $ruby_version_string"
   tar -xzf $ruby_source_tar_name >> $log_file 2>&1
   echo "==> done..."
-  echo -e "\n=> Building Ruby $ruby_version_string (this will take awhile)..."
+  echo -e "\n=> Building Ruby $ruby_version_string (this will take a while)..."
   cd  $ruby_source_dir_name && ./configure --prefix=/usr/local >> $log_file 2>&1 \
    && make >> $log_file 2>&1 \
     && sudo make install >> $log_file 2>&1
@@ -132,7 +132,7 @@ elif [ $whichRuby -eq 2 ] ; then
   source ~/.bashrc
   source ~/.bash_profile
   echo "==> done..."
-  echo -e "\n=> Installing Ruby $ruby_version_string (this will take awhile)..."
+  echo -e "\n=> Installing Ruby $ruby_version_string (this will take a while)..."
   echo -e "=> More information about installing rubies can be found at http://rvm.beginrescueend.com/rubies/installing/ \n"
   rvm install $ruby_version >> $log_file 2>&1
   echo -e "\n==> done..."
